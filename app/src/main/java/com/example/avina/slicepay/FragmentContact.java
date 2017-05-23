@@ -24,7 +24,6 @@ public class FragmentContact extends Fragment {
     ArrayList<String> Contacts;
     ArrayAdapter<String> arrayAdapter ;
     String name, phonenumber;
-    public  static final int RequestPermissionCode  = 1 ;
 
     public FragmentContact() {
         // Required empty public constructor
@@ -40,6 +39,7 @@ public class FragmentContact extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_contact, container, false);
+        RuntimePermission();
         dothis(v);
         return v;
    }
@@ -66,5 +66,15 @@ public class FragmentContact extends Fragment {
 
        cursor.close();
    }
+    
+    public void RuntimePermission(){
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                Manifest.permission.READ_CONTACTS)) {}
+        else {
+            ActivityCompat.requestPermissions(getActivity(),new String[]{
+                    Manifest.permission.READ_CONTACTS}, RequestPermissionCode);
+        }
+    }
 
 }
